@@ -16,9 +16,9 @@ class DjayListener extends Listener {
     Frame frame = controller.frame();
     HandArray hands = frame.hands();
     long numHands = hands.size();
-    System.out.println("Frame id: " + frame.id()
+    /*System.out.println("Frame id: " + frame.id()
                      + ", timestamp: " + frame.timestamp()
-                     + ", hands: " + numHands);
+                     + ", hands: " + numHands);*/
 
     if (numHands >= 1) {
       // Get the first hand
@@ -38,8 +38,8 @@ class DjayListener extends Listener {
           pos.setZ(pos.getZ() + tip.getPosition().getZ());
         }
         pos = new Vector(pos.getX()/numFingers, pos.getY()/numFingers, pos.getZ()/numFingers);
-        System.out.println("Hand has " + numFingers + " fingers with average tip position"
-                         + " (" + pos.getX() + ", " + pos.getY() + ", " + pos.getZ() + ")");
+        /*System.out.println("Hand has " + numFingers + " fingers with average tip position"
+	  + " (" + pos.getX() + ", " + pos.getY() + ", " + pos.getZ() + ")");*/
       }
 
       // Check if the hand has a palm
@@ -48,8 +48,8 @@ class DjayListener extends Listener {
         // Get the palm position and wrist direction
         Vector palm = palmRay.getPosition();
         Vector wrist = palmRay.getDirection();
-        System.out.println("Palm position ("
-                         + palm.getX() + ", " + palm.getY() + ", " + palm.getZ() + ")");
+        /*System.out.println("Palm position ("
+	  + palm.getX() + ", " + palm.getY() + ", " + palm.getZ() + ")");*/
 
         // Check if the hand has a normal vector
         Vector normal = hand.normal();
@@ -62,16 +62,16 @@ class DjayListener extends Listener {
           if (pitchAngle > 180) pitchAngle -= 360;
           if (rollAngle > 180) rollAngle -= 360;
           if (yawAngle > 180) yawAngle -= 360;
-          System.out.println("Pitch: " + pitchAngle + " degrees,  "
+          /*System.out.println("Pitch: " + pitchAngle + " degrees,  "
                            + "roll: " + rollAngle + " degrees,  "
-                           + "yaw: " + yawAngle + " degrees");
-        }
+                           + "yaw: " + yawAngle + " degrees");*/
+	}
       }
 
       // Check if the hand has a ball
       Ball ball = hand.ball();
       if (ball != null) {
-        System.out.println("Hand curvature radius: " + ball.getRadius() + " mm");
+	  //System.out.println("Hand curvature radius: " + ball.getRadius() + " mm");
       }
     }
   }
