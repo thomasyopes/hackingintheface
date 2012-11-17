@@ -80,7 +80,7 @@ class DjayListener extends Listener {
 class Djay {
   public static void main(String[] args) {
     // Create a sample listener and assign it to a controller to receive events
-    DjayListener listener = new SampleListener();
+    DjayListener listener = new DjayListener();
     Controller controller = new Controller(listener);
 
     // Keep this process running until Enter is pressed
