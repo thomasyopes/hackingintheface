@@ -1,4 +1,5 @@
 class DjayListener extends Listener {
+    final static int BOTTOM, TOPLEFT, TOPRIGHT, NOTHING = 0,1,2,3;
     public void onInit(Controller controller) {
 	System.out.println("Initialized");
     }
