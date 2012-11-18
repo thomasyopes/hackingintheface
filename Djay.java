@@ -1,5 +1,7 @@
 class DjayListener extends Listener {
     final static int BOTTOM, TOPLEFT, TOPRIGHT, NOTHING = 0,1,2,3;
+    int area = NOTHING; // area detects whether a hand is in BOTTOM, TOPLEFT, or TOPRIGHT;
+    boolean present = false;
     public void onInit(Controller controller) {
 	System.out.println("Initialized");
     }
@@ -15,7 +17,7 @@ class DjayListener extends Listener {
     int getArea(Vector pos) {
 	if(pos.getZ()>30){
 	    return BOTTOM;
-	} elseif (pos.getX()<0) {
+	} else if (pos.getX()<0) {
 	    return TOPLEFT;
 	} else {
 	    return TOPRIGHT;
@@ -27,9 +29,6 @@ class DjayListener extends Listener {
 	Frame frame = controller.frame();
 	HandArray hands = frame.hands();
 	long numHands = hands.size();
-	int area = NOTHING; // area detects whether a hand is in BOTTOM, TOPLEFT, or TOPRIGHT;
-	boolean present = false;
-
 
 	if (numHands >= 1) {
 	    present = true;
@@ -95,12 +94,27 @@ class DjayListener extends Listener {
 }
 
 class Djay {
-    
 
     public static void main(String[] args) {
 	// Create a sample listener and assign it to a controller to receive events
 	DjayListener listener = new DjayListener();
 	Controller controller = new Controller(listener);
+	if (listener.present) {
+	    int area = listener.area;
+	    if (area == DjayListener.BOTTOM) {
+
+	    }
+	    else if (area == DjayListener.TOPLEFT) {
+		switch (listener.event)
+		    case DjayListener.SWIPEUP: {
+			// play/pause left shortcut
+		    }
+		
+	    }
+	    else if (area == DjayListener.TOPRIGHT) {
+
+	    }
+	}
 
 	// Keep this process running until Enter is pressed
 	System.out.println("Press Enter to quit...");
