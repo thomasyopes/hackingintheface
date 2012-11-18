@@ -16,11 +16,12 @@ class DjayListener extends Listener {
     Frame frame = controller.frame();
     HandArray hands = frame.hands();
     long numHands = hands.size();
-    /*System.out.println("Frame id: " + frame.id()
-                     + ", timestamp: " + frame.timestamp()
-                     + ", hands: " + numHands);*/
+    int area = NOTHING; // area detects whether a hand is in BOTTOM, TOPLEFT, or TOPRIGHT;
+    boolean present = false;
+
 
     if (numHands >= 1) {
+      present = true;
       // Get the first hand
       Hand hand = hands.get(0);
 
@@ -38,6 +39,7 @@ class DjayListener extends Listener {
           pos.setZ(pos.getZ() + tip.getPosition().getZ());
         }
         pos = new Vector(pos.getX()/numFingers, pos.getY()/numFingers, pos.getZ()/numFingers);
+	area = getArea(pos);
         /*System.out.println("Hand has " + numFingers + " fingers with average tip position"
 	  + " (" + pos.getX() + ", " + pos.getY() + ", " + pos.getZ() + ")");*/
       }
@@ -48,6 +50,10 @@ class DjayListener extends Listener {
         // Get the palm position and wrist direction
         Vector palm = palmRay.getPosition();
         Vector wrist = palmRay.getDirection();
+	if (area == NOTHING) { //fingers not detected, get area of your hand
+	    Vector palmPos = new Vector(palm.getX(), palm.getY(), palm.getZ());
+	    area = getArea(palmPos);
+	}
         /*System.out.println("Palm position ("
 	  + palm.getX() + ", " + palm.getY() + ", " + palm.getZ() + ")");*/
 
